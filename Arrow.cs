@@ -1,33 +1,35 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FletchersArrows.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace FletchersArrows
 {
     public class Arrow
     {
-        public string Arrowhead;
+        public string _arrowhead;
+        //public ArrowheadType TypeOfArrowhead;
 
         [MinLength(60), MaxLength(100)]
-        public int ShaftLength;
+        public int _shaftLength;
 
-        public string Fletching;
+        public string _fletching;
 
         public Arrow(string arrowhead, int shaftLength, string fletching)
         {
-            Arrowhead = arrowhead;
-            Fletching = fletching;
-            ShaftLength = shaftLength;
+            _arrowhead = arrowhead;
+            _fletching = fletching;
+            _shaftLength = shaftLength;
         }
 
 
         public double CostPerArrow(Arrow customArrow)
         {
-            double cost = 0;
+            //double cost = 0;
             double arrowheadCost = 0;
             double shaftCost = 0;
             double fletchingCost = 0;
 
             //Calculate Arrowhead cost
-            switch (customArrow.Arrowhead)
+            switch (customArrow._arrowhead)
             {
                 case "wood":
                     arrowheadCost = 3;
@@ -44,10 +46,10 @@ namespace FletchersArrows
             }
 
             //Calculate shaft cost
-            shaftCost = .05 * customArrow.ShaftLength;
+            shaftCost = .05 * customArrow._shaftLength;
 
             //Calculate fletching cost
-            switch (customArrow.Fletching)
+            switch (customArrow._fletching)
             {
                 case "goose feathers":
                     fletchingCost = 3;
@@ -63,29 +65,11 @@ namespace FletchersArrows
                     break;
             }
 
-            cost = arrowheadCost + shaftCost + fletchingCost;
-            return cost;
+            
+            return arrowheadCost + shaftCost + fletchingCost;
 
         }
 
-
-
     }
-
-    enum ArrowHeadMaterial
-    {
-        Wood,
-        Steel,
-        Obsidian
-    }
-    enum FletchingMaterial
-    {
-        Plastic,
-        TurkeyFeathers,
-        GooseFeathers
-    }
-
-
-
 
 }
